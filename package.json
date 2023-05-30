@@ -1,0 +1,56 @@
+{
+  "name": "talk-to-gpt",
+  "displayName": "Talk to gpt",
+  "version": "0.0.1",
+  "description": "This extension allows you to talk to ChatGPT using your voice. ChatGPT can also answer in more than a hundred languages!",
+  "author": "DavidCks",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^2.6.0",
+    "@emotion/react": "^11.10.8",
+    "@emotion/styled": "^11.10.8",
+    "@types/easy-speech": "^1.2.0",
+    "@types/firefox-webext-browser": "^111.0.1",
+    "antd": "^5.4.6",
+    "cld": "^2.9.0",
+    "easy-speech": "^2.0.0",
+    "framer-motion": "^10.12.4",
+    "franc-min": "^6.1.0",
+    "language-monitor": "^1.0.3",
+    "languagedetect": "^2.0.0",
+    "plasmo": "0.69.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.8.0",
+    "react-speech-recognition": "^3.10.0",
+    "react-switch": "^7.0.0",
+    "regenerator-runtime": "^0.13.11",
+    "sentence-splitter": "^4.2.0"
+  },
+  "devDependencies": {
+    "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
+    "@types/chrome": "0.0.233",
+    "@types/node": "18.15.12",
+    "@types/react": "18.0.37",
+    "@types/react-dom": "18.0.11",
+    "@types/react-speech-recognition": "^3.9.2",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "prettier": "2.8.7",
+    "tailwindcss": "^3.3.2",
+    "typescript": "5.0.4"
+  },
+  "manifest": {
+    "host_permissions": [
+      "https://chat.openai.com/*"
+    ],
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ]
+  }
+}

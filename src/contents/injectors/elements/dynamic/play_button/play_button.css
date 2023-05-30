@@ -1,0 +1,26 @@
+.play-button {
+    position: absolute;
+    left: 0;
+    max-width: 34px;
+    height: 34px;
+    margin-left: -56px;
+    margin-top: -1px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    transform-origin: 50% 55%;
+    animation: spin 2s infinite linear;
+}

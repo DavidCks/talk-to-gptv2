@@ -1,0 +1,1 @@
+export const ids = { "mic_button": "controls-input_controls-mic_button", "dialogue_toggle": "controls-dialogue_toggle" }
