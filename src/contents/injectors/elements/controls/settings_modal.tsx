@@ -4,6 +4,7 @@ import { getGlobalClassName } from '~contents/utils/styler';
 import { classList } from '~contents/utils/classList_cloner';
 import { FiSettings } from "react-icons/fi";
 import { styles } from '~contents/utils/computedStyles_cloner';
+import Settings from './settings';
 
 const globalClassName: string = getGlobalClassName()
 
@@ -35,10 +36,8 @@ export const SettingsModal: React.FC = () => {
             <Button type="text" className={classList()} style={{ height: "100%", padding: "5px 15px 5px 15px", display: "flex", justifyContent: "center" }} onClick={showModal}>
                 <FiSettings color={getInitialColor()}></FiSettings>
             </Button>
-            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+            <Modal okType='text' title="Settings" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Settings></Settings>
             </Modal>
         </div>
     );

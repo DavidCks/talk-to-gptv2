@@ -16,7 +16,7 @@ export const DialogueToggle = () => {
         setIsChecked(!isChecked)
     }
 
-    return <div className={classList() + globalClassName}>
+    return <div className={classList() + globalClassName + " dialogue-field"}>
         <label id="dialogueLabel">
             <Switch id="controls-dialogue_toggle" className={globalClassName} onChange={handleChange} checked={isChecked} />
             <span className={globalClassName} id="dialogueLabelText">Dialogue</span>

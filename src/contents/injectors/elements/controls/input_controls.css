@@ -6,3 +6,7 @@
     bottom: 0;
     margin: auto;
 }
+
+.select-field {
+    padding-block: 12px;
+}

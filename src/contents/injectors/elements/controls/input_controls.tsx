@@ -98,7 +98,7 @@ export const InputControls = () => {
         <button id="controls-input_controls-mic_button" className={classList() + globalClassName} style={{ minWidth: "40px" }} onClick={handleClick}>
             <FaMicrophone className="mic-button-svg dark:text-white" fill={isClicked ? "red" : getInitialColor()} />
         </button>
-        <select className={classList() + globalClassName}
+        <select className={classList() + globalClassName + " select-field"}
             onChange={handleLangSelectChange}
             defaultValue={selectedLanguage}>
             {supportedLanguages.map(([label, _dialects, _langCode]) => (
@@ -109,7 +109,7 @@ export const InputControls = () => {
             ))
             }
         </select>
-        <select ref={langCodeSelectRef} className={classList() + globalClassName} defaultValue={selectedLanguageCode}
+        <select ref={langCodeSelectRef} className={classList() + globalClassName + " select-field"} defaultValue={selectedLanguageCode}
             onChange={handleLangCodeSelectChange}>
             {(supportedLanguages
                 .filter(([label, _dialects, _langCode]) => (label == selectedLanguage)))
