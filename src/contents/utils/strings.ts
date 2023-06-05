@@ -1,5 +1,6 @@
 import { split, type TxtParentNodeWithSentenceNodeContent } from "sentence-splitter"
 import { franc, type Options } from "franc-min"
+import { getSpeechSettings, type SpeechSettings } from "./settings"
 
 export const crxToFranc = {
     "en": "eng",
@@ -226,6 +227,8 @@ async function splitByLanguage(text: string): Promise<[{ lang: string, sentence:
 }
 
 export async function getUtterances(text): Promise<[SpeechSynthesisUtterance]> {
+
+    const speechSettings: SpeechSettings = getSpeechSettings()
     let classifiedStrings = await splitByLanguage(text)
     let utterances: [SpeechSynthesisUtterance] = [new SpeechSynthesisUtterance(classifiedStrings[0].sentence)];
     utterances[0].lang = classifiedStrings[0].lang

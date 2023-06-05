@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { RadioChangeEvent } from 'antd';
-import { Radio, Tabs } from 'antd';
+import { Radio, Tabs, Col, InputNumber, Row, Slider, Space, Divider } from 'antd';
 
 type TabPosition = 'left' | 'right' | 'top' | 'bottom';
 
@@ -31,7 +31,7 @@ const Settings: React.FC = () => {
             <Tabs
                 defaultActiveKey="1"
                 tabPosition={mode}
-                style={{ height: 220 }}
+                style={{ height: "auto" }}
                 items={SettingsItems.map((e, i) => {
                     const id = String(i);
                     return {
@@ -46,11 +46,51 @@ const Settings: React.FC = () => {
 };
 
 const AudioOutputSettings: React.FC = () => {
-    return <div>Audio Output Settings</div>
+
+
+    return (<>
+        <SliderInput min={0} max={200} label="Volume" id="settings-volume" />
+        <SliderInput min={0} max={200} label="Talking Speed" id="settings-rate" />
+        <SliderInput min={0} max={200} label="Pitch" id="settings-pitch" />
+        <Divider></Divider>
+    </>
+    );
 }
 
 const AudioInputSettings: React.FC = () => {
     return <div>Audio Input Settings</div>
+}
+
+const SliderInput = ({ min, max, label, id }: { min: number, max: number, label: string, id: string }) => {
+    const [inputValue, setInputValue] = useState(((min + max) / 2) | 0);
+
+    const onChange = (newValue: number) => {
+        setInputValue(newValue);
+    };
+
+    return <>
+        <label htmlFor={id}>{label}</label>
+        <Row id={id}>
+            <Col span={12}>
+                <Slider
+                    min={min}
+                    max={max}
+                    onChange={onChange}
+                    value={typeof inputValue === 'number' ? inputValue : 0}
+                />
+            </Col>
+            <Col span={4}>
+                <InputNumber
+                    prefix="%"
+                    min={min}
+                    max={max}
+                    style={{ margin: '0 16px' }}
+                    value={inputValue}
+                    onChange={onChange}
+                />
+            </Col>
+        </Row>
+    </>
 }
 
 export default Settings;
