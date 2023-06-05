@@ -58,8 +58,9 @@ export const InputControls = () => {
             listeningOptions.language = selectedLanguageCode
             SpeechRecognition.startListening(listeningOptions)
             console.log(`interpreting ${selectedLanguage} (${selectedLanguageCode})...`)
+            window.speechSynthesis.cancel()
         } else {
-            injectPromptsAndCancelReading()
+            //injectPromptsAndCancelReading()
             SpeechRecognition.stopListening()
             console.log("stopped listening")
             resetTranscript()

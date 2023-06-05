@@ -18,6 +18,9 @@ function injectDialoguePrompt(injectorRoot: HTMLElement | HTMLTextAreaElement) {
 export function injectPromptsAndCancelReading() {
     const injectorRoot = getInjectorRootElement() as HTMLElement
     const originalRootText = injectorRoot.innerHTML
+    if (originalRootText.startsWith("Instructions: ")) {
+        return
+    }
     let instructions = "Instructions: "
     instructions += injectDialoguePrompt(injectorRoot)
     let prompt = instructions += "\n\nQuery: " + originalRootText

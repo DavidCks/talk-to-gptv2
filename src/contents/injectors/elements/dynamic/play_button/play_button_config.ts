@@ -2,7 +2,7 @@
 import { build, playStopOnclick, stopLabel } from './play_button';
 import { injectElements } from '../../../textarea_wrapper';
 const observerTargetQuery = "main"
-const buttonTargetQuery = "p, ul"
+const buttonTargetQuery = "p, ul, ol"
 
 function getObserverTargets() {
     const targets = document.querySelectorAll(observerTargetQuery)

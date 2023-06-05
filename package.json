@@ -1,7 +1,7 @@
 {
   "name": "talk-to-gpt",
-  "displayName": "Talk to gpt",
-  "version": "0.0.1",
+  "displayName": "Talk to GPT",
+  "version": "0.1.1",
   "description": "This extension allows you to talk to ChatGPT using your voice. ChatGPT can also answer in more than a hundred languages!",
   "author": "DavidCks",
   "scripts": {

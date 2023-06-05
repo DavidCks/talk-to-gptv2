@@ -179,7 +179,16 @@ async function splitByLanguage(text: string): Promise<[{ lang: string, sentence:
                     sentences.push(se)
                 });
             } else {
-                sentences.push(s.raw)
+                let lb = s.raw.split("\n")
+                for (const element of lb) {
+                    let paren = element.split("(")
+                    for (const element2 of paren) {
+                        let paren2 = element2.split(")")
+                        for (const p3 of paren2) {
+                            sentences.push(p3)
+                        }
+                    }
+                }
             }
         }
     })
