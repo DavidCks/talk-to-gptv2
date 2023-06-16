@@ -12,37 +12,35 @@ export const config: PlasmoCSConfig = {
   matches: ["https://chat.openai.com/*"]
 }
 
+
+let recentlyInjectedThroughbserver = false;
+const observer: MutationObserver = new MutationObserver((mutations) => {
+  setTimeout(() => recentlyInjectedThroughbserver = false, 1000);
+  if (!recentlyInjectedThroughbserver) {
+    reinjectElements()
+  }
+  recentlyInjectedThroughbserver = true
+});
+
 setInterval(() => injectElements(), 1000)
 
-window.addEventListener("load", () => {
-  const observerConfig: MutationObserverInit = { attributes: true, childList: true, subtree: true };
-  let navroot = document.querySelector("nav");
-  if (navroot == undefined) {
-    navroot = document.querySelector("div>div>div>div>button");
-  }
-  observer.observe(navroot, observerConfig);
-  injectElements();
-})
-
-let isCorrectlyStyled = false;
-const observer = new MutationObserver(function (mutations) {
-  reinjectElements()
-});
-function reinjectElements() {
+function observerSetup() {
   const observerConfig: MutationObserverInit = { attributes: false, childList: true, subtree: true };
   let navroot = document.querySelector("nav");
   if (navroot == undefined) {
     navroot = document.querySelector("div>div>div>div>button");
   }
   observer.observe(navroot, observerConfig);
-  navroot.addEventListener("click", () => {
-    let el = document.getElementById("textarea_wrapper_root");
-    if (el !== null) {
-      el.parentElement.removeChild(el)
-    }
-    setTimeout(reinjectElements, 1000)
-  })
+}
 
+window.addEventListener("load", () => {
+  observerSetup();
+  injectElements();
+})
+
+let isCorrectlyStyled = false;
+function reinjectElements() {
+  observerSetup();
   if (!isCorrectlyStyled || !rootElementExists()) {
     injectElements()
     addEvents()

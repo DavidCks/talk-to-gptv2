@@ -31,6 +31,9 @@ dependencies:
   franc-min:
     specifier: ^6.1.0
     version: 6.1.0
+  iso-639-2:
+    specifier: ^3.0.2
+    version: 3.0.2
   language-monitor:
     specifier: ^1.0.3
     version: 1.0.3
@@ -5236,6 +5239,10 @@ packages:
 
   /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /iso-639-2@3.0.2:
+    resolution: {integrity: sha512-tna50aWwcGTIn81S9MzD1NSovHYTpFgmPVszHiLF5Vg/xmXAJ9XAkMOB9a8TH9Vi7qwf/x/8NJy2F+lM5OEwAw==}
     dev: false
 
   /javascript-natural-sort@0.7.1:

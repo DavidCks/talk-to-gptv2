@@ -1,15 +1,19 @@
+import { ids } from "~contents/injectors/ids"
+
 export type SpeechSettings = {
-    volume: number,
-    pitch: number,
-    rate: number,
+  volume: number
+  pitch: number
+  rate: number
 }
 
 export const getSpeechSettings: () => SpeechSettings = () => {
-    const vEl = document.querySelector("#settings-volume")
-    const vSlider = vEl.querySelector("[role=slider]")
-    const pEl = document.querySelector("#settings-pitch")
-    const pSlider = pEl.querySelector("[role=slider]")
-    const rEl = document.querySelector("#settings-rate")
-    const rSlider = rEl.querySelector("[role=slider]")
-    return { volume: 1, pitch: 1, rate: 1 }
+  const v = localStorage.getItem(ids.settings_volume) ?? "1"
+  const r = localStorage.getItem(ids.settings_rate) ?? "1"
+  const p = localStorage.getItem(ids.settings_pitch) ?? "1"
+  console.log(v, r, p)
+  return {
+    volume: parseInt(v) / 100,
+    pitch: parseInt(p) / 100,
+    rate: parseInt(r) / 100
+  }
 }

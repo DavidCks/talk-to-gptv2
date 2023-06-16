@@ -2,9 +2,8 @@
 import { classList } from "~contents/utils/classList_cloner"
 import { injectStyle } from "~contents/utils/styler"
 import { getUtterances } from "~contents/utils/strings"
-import cssText from "data-text:~contents/injectors/elements/dynamic/play_button/play_button.css"
-import { url } from "inspector"
-import { Console } from "console"
+import cssText from "data-text:./play_button.css"
+import { getSpeechSettings } from "~contents/utils/settings"
 injectStyle(cssText)
 
 
@@ -106,6 +105,14 @@ async function playText(text: string, { target, btn }) {
     playUtterances(utterances, null, { target: target, btn: btn })
 }
 
+function applySpeechSettings(utterance: SpeechSynthesisUtterance): SpeechSynthesisUtterance {
+    const settings = getSpeechSettings()
+    utterance.rate = settings.rate
+    utterance.volume = settings.volume
+    utterance.pitch = settings.pitch
+    return utterance
+}
+
 function playUtterances(utterances: [SpeechSynthesisUtterance], utterance: SpeechSynthesisUtterance | null = null, { target: target, btn: btn }) {
     if (utterance == null && utterances.length > 0) {
         const nextUtterance = utterances.shift()
@@ -122,10 +129,10 @@ function playUtterances(utterances: [SpeechSynthesisUtterance], utterance: Speec
             playStopOnclick(target, btn)
             console.log(btn)
             const nextt: HTMLElement = btn.parentElement.nextElementSibling
-            if (nextt !== null || nextt !== undefined) {
+            if (nextt !== null && nextt !== undefined) {
                 const nextb: HTMLButtonElement = nextt.getElementsByClassName("play-button")[0] as HTMLButtonElement
                 setTimeout(() => {
-                    if (nextb !== undefined || nextb !== null) {
+                    if (nextb !== undefined && nextb !== null) {
                         playStopOnclick(nextt, nextb)
                     }
                 }, 100)
@@ -138,7 +145,8 @@ function playUtterances(utterances: [SpeechSynthesisUtterance], utterance: Speec
         playing = false
     }
     const synth = window.speechSynthesis
-    synth.speak(utterance)
+    const settingsAppliedUtterance = applySpeechSettings(utterance)
+    synth.speak(settingsAppliedUtterance)
 }
 
 function stopText(target: HTMLElement, btn: HTMLButtonElement) {
