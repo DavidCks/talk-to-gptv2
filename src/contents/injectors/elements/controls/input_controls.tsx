@@ -19,6 +19,7 @@ import type {
 import { getInjectorRootElement } from "~contents/injectors/textarea_wrapper"
 import { getGlobalClassName, injectStyle } from "~contents/utils/styler"
 
+import { addEvents } from "../../../manipulators/events"
 import { supportedLanguages } from "../../../utils/supportedLanguages_getter"
 
 injectStyle(cssText)
@@ -103,8 +104,15 @@ export const InputControls = () => {
 
   const textareaElement: HTMLTextAreaElement =
     getInjectorRootElement() as HTMLTextAreaElement
+  setTimeout(() => {
+    if (textareaElement.innerHTML === "" && transcript !== "") {
+      console.log("resetting voice rec...")
+      resetTranscript()
+    }
+  }, 500)
   useEffect(() => {
     if (transcript !== "") {
+      console.log(transcript)
       textareaElement.innerHTML = transcript
       const textfieldLength = textareaElement.value.length
       textareaElement.addEventListener("focus", (e: any) => {

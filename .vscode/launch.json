@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "type": "chrome",
+      "name": "https://chat.openai.com",
+      "request": "launch",
+      "url": "https://chat.openai.com"
+    }
+  ]
+}

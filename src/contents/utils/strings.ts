@@ -4,6 +4,7 @@ import {
   split
 } from "sentence-splitter"
 
+import { isNull } from "./is_null"
 import { type SpeechSettings, getSpeechSettings } from "./settings"
 
 export const crxToFranc = {
@@ -226,10 +227,8 @@ async function splitByLanguage(
   text: string
 ): Promise<[{ lang: string; sentence: string }]> {
   const sentences = splitIntoSentences(text)
-  console.log("SENTENCES:")
-  console.log(sentences)
   let langDetect = getLanguageDetector()
-  let config: Options = { ignore: ["und", "som", "tur"] }
+  let config: Options = { ignore: ["und", "som", "tur"], only: [] }
   let lngs: string[] = []
   for await (const sentence of sentences) {
     // analyze the language of a sentence using franc and add it to possible languages
@@ -246,23 +245,25 @@ async function splitByLanguage(
       browserDetect.languages.forEach((lng) => {
         lngs.push(crxToFranc[lng.language])
       })
-      config.only = Array.from(new Set(lngs))
     }
   }
-  console.log(config.only)
+  config.only = Array.from(new Set(lngs))
   let speechObj: [{ lang: string; sentence: string }] = [
     { lang: "", sentence: "" }
   ]
   for (const s of sentences) {
     let lang = franc(s, config)
-    if (lang == "und") {
-      lang = config.only[0]
+    const langIsUndefined = lang === "und" || isNull(lang)
+    console.log(langIsUndefined)
+    console.log(!isNull(config.only[0]))
+    if (langIsUndefined) {
+      lang = !isNull(config.only[0]) ? config.only[0] : "eng"
     }
     if (s !== "") {
       speechObj.push({ lang: francToCrx[lang], sentence: s })
     }
   }
-  console.log(speechObj)
+
   return speechObj
 }
 
@@ -275,6 +276,8 @@ export async function getUtterances(text): Promise<[SpeechSynthesisUtterance]> {
   utterances[0].lang = classifiedStrings[0].lang
   classifiedStrings.shift()
   classifiedStrings.forEach(({ lang, sentence }) => {
+    console.log(`Creating Utternace: ${sentence}`)
+    console.log(`with lang: ${lang}`)
     const utterance = new SpeechSynthesisUtterance(sentence)
     utterance.lang = lang.split("-")[0]
     const voices = window.speechSynthesis.getVoices()

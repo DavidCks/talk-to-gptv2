@@ -24,9 +24,10 @@ label>button+span {
         flex-direction: row;
         align-content: center;
         align-items: center;
+        padding-inline: 12px;
     }
 
     #dialogueLabel::after {
-        content: "🗣";
+        content: "💬";
     }
 }
